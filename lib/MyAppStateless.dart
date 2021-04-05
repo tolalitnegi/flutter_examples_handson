@@ -16,27 +16,16 @@ void main() {
  * StatelessWidget from package:flutter/material.dart
  * or StatefulWidget
  */
-class MyWidgetsApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return MyWidgetsAppState(); // connection to State class
-  }
-}
-
-class MyWidgetsAppState extends State<MyWidgetsApp> {
+class MyWidgetsApp extends StatelessWidget {
   var idx = 0;
-  var questions = ["what's your hair color?", "What's your eye color?"];
-
+  var questions = ["what's your hair color?",  "What's your eye color?"];
+  
   void answerHandler() {
-    void updateIdx() {
-      if (idx == 1) {
-        idx = 0;
-      } else {
-        idx++;
-      }
+    if (idx == 1) {
+      idx = 0;
+    } else {
+      idx++;
     }
-
-    setState(updateIdx);
   }
 
   /**
