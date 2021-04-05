@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   var myapp = new MyWidgetsApp();
-  runApp(myapp); // runApp also from top package flutter , calls the build method 
+  runApp(
+      myapp); // runApp also from top package flutter , calls the build method
   // runApp(myapp);
 }
 
@@ -15,17 +16,23 @@ void main(){
  * StatelessWidget from package:flutter/material.dart
  * or StatefulWidget
  */
-class MyWidgetsApp extends StatelessWidget { 
-
+class MyWidgetsApp extends StatelessWidget {
   /**
    * build method has to be overriden / implemented here which returns a widget of MaterialApp
    * which has a nested widget Text rendered as home
    */
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Text('Hello world'),);
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter app1'),
+        ), // header trailing comma for formatting
+        body: Text('Body of the app'),
+      ),
+    );
+    // return MaterialApp(home: Text('Hello world'),);
     // // TODO: implement build
     // throw UnimplementedError();
   }
-
 }
