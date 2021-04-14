@@ -19,15 +19,19 @@ void main() {
 class MyWidgetsApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyWidgetsAppState(); // connection to State class
+    return _MyWidgetsAppState(); // connection to State class
   }
 }
 
-class MyWidgetsAppState extends State<MyWidgetsApp> {
+/**
+ * _ to make the class private
+ * so that the state is not accessible outside this file
+ */
+class _MyWidgetsAppState extends State<MyWidgetsApp> {
   var idx = 0;
   var questions = ["what's your hair color?", "Ok so now tell me, what's your eye color?"];
 
-  void answerHandler() {
+  void _answerHandler() {
     void updateIdx() {
       if (idx == 1) {
         idx = 0;
@@ -55,15 +59,15 @@ class MyWidgetsAppState extends State<MyWidgetsApp> {
               Text(questions[idx]),
               RaisedButton(
                 child: Text('Black'),
-                onPressed: answerHandler,
+                onPressed: _answerHandler,
               ),
               RaisedButton(
                 child: Text('Grey'),
-                onPressed: answerHandler,
+                onPressed: _answerHandler,
               ),
               RaisedButton(
                 child: Text('Brown'),
-                onPressed: answerHandler,
+                onPressed: _answerHandler,
               ),
             ],
           )
