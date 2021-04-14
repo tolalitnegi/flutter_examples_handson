@@ -25,7 +25,7 @@ class MyWidgetsApp extends StatefulWidget {
 
 class MyWidgetsAppState extends State<MyWidgetsApp> {
   var idx = 0;
-  var questions = ["what's your hair color?", "What's your eye color?"];
+  var questions = ["what's your hair color?", "Ok so now tell me, what's your eye color?"];
 
   void answerHandler() {
     void updateIdx() {
@@ -36,7 +36,7 @@ class MyWidgetsAppState extends State<MyWidgetsApp> {
       }
     }
 
-    setState(updateIdx);
+    setState(updateIdx); // calls the build method , flutter efficiently renders only the changes
   }
 
   /**

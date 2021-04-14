@@ -2,6 +2,13 @@
 
 A new Flutter project.
 
+## setup
+- vscode -> remove any other project
+- android studio -> Configure -> AVD Manager -> Choose a virtual device and Run 
+- vscode --> Run --> Run without debugging
+- xcode
+
+
 ## folder structure
 - android - needed for building the android app (android sdk project) 
 - build - output of application , done by flutter sdk
