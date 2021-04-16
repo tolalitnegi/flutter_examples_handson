@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
       ],
     },
     {
-      'questionText': 'Who\'s your favorite SportsPerson?',
+      'questionText': 'Favorite Sports person?',
       'answers': [
         {'text': 'Messi', 'score': 1},
         {'text': 'Ronaldo', 'score': 2},
@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My First App'),
+          title: Text('Flutter: Personality test'),
         ),
         body: _questionIndex < _questions.length // a way of ourting if the index is less show quiz else show Result 
             ? Quiz(
