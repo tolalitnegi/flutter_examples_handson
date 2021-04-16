@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  final Function onClickHandler ; // final can change intiailly once, but const doesnt , run time vs compile time
-  final String answerString;
-  Answer(this.onClickHandler, this.answerString); // _answerHandler is recived into this.onClickHandler
+  final Function selectHandler;
+  final String answerText;
+
+  Answer(this.selectHandler, this.answerText);
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +13,9 @@ class Answer extends StatelessWidget {
       child: RaisedButton(
         color: Colors.blue,
         textColor: Colors.white,
-        child: Text(answerString),
-        onPressed: onClickHandler,
-      )
+        child: Text(answerText),
+        onPressed: selectHandler,
+      ),
     );
   }
 }

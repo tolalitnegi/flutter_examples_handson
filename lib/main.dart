@@ -1,86 +1,99 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
 
-void main() {
-  var myapp = new MyWidgetsApp();
-  runApp(
-      myapp); // runApp also from top package flutter , calls the build method
-  // runApp(myapp);
-}
+import './quiz.dart';
+import './result.dart';
+// void main() {
+//   runApp(MyApp());
+// }
 
-// or use arrow function
-// void main() => runApp(MyWidgetsApp());
+void main() => runApp(MyApp());
 
-/**
- * Class with widgets
- * flutter is all about widgets
- * StatelessWidget from package:flutter/material.dart
- * or StatefulWidget
- */
-class MyWidgetsApp extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _MyWidgetsAppState(); // connection to State class
+    // TODO: implement createState
+    return _MyAppState();
   }
 }
 
-/**
- * _ to make the class private
- * so that the state is not accessible outside this file
- */
-class _MyWidgetsAppState extends State<MyWidgetsApp> {
-  var idx = 0;
-  final questions = const [
-    // final question but the list[] is const
+class _MyAppState extends State<MyApp> {
+  final _questions = const [
     {
-      'questionText': "what's your hair color?",
-      'answers': ['red', 'brown', 'black', 'grey']
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 2},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
     },
     {
-      'questionText': "what's your fav subject?",
-      'answers': ['science', 'maths', 'computer', 'history']
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 11},
+        {'text': 'Elephant', 'score': 5},
+        {'text': 'Lion', 'score': 9},
+      ],
+    },
+    {
+      'questionText': 'Who\'s your favorite SportsPerson?',
+      'answers': [
+        {'text': 'Messi', 'score': 1},
+        {'text': 'Ronaldo', 'score': 2},
+        {'text': 'Bolt', 'score': 3},
+        {'text': 'LeBron', 'score': 2},
+      ],
     },
   ];
+  var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerHandler() {
-    void updateIdx() {
-      if (idx == 1) {
-        idx = 0;
-      } else {
-        idx++;
-      }
-    }
-
-    setState(
-        updateIdx); // calls the build method , flutter efficiently renders only the changes
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
   }
 
-  /**
-   * build method has to be overriden / implemented here which returns a widget of MaterialApp
-   * which has a nested widget Text rendered as home
-   */
+  void _answerQuestion(int score) {
+    // var aBool = true;
+    // aBool = false;
+
+    _totalScore += score;
+
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions!');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // var dummy = const ['Hello'];
+    // dummy.add('Max');
+    // print(dummy);
+    // dummy = [];
+    // questions = []; // does not work if questions is a const
+
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('Flutter app1'),
-          ), // header trailing comma for formatting
-          body: Column(
-            children: [
-              Question(questions[idx]['questionText']),
-              ...(questions[idx]['answers'] as List<String>).map((ans) {
-                return Answer(_answerHandler, ans);
-              }).toList()
-            ],
-          )
-          // body: Text('Body of the app'),
-
-          ),
+        appBar: AppBar(
+          title: Text('My First App'),
+        ),
+        body: _questionIndex < _questions.length // a way of ourting if the index is less show quiz else show Result 
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(_totalScore, _resetQuiz),
+      ),
     );
-    // return MaterialApp(home: Text('Hello world'),);
-    // // TODO: implement build
-    // throw UnimplementedError();
   }
 }
