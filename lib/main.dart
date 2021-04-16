@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './question.dart';
+import './answer.dart';
 
 void main() {
   var myapp = new MyWidgetsApp();
@@ -29,7 +31,17 @@ class MyWidgetsApp extends StatefulWidget {
  */
 class _MyWidgetsAppState extends State<MyWidgetsApp> {
   var idx = 0;
-  var questions = ["what's your hair color?", "Ok so now tell me, what's your eye color?"];
+  final questions = const [
+    // final question but the list[] is const
+    {
+      'questionText': "what's your hair color?",
+      'answers': ['red', 'brown', 'black', 'grey']
+    },
+    {
+      'questionText': "what's your fav subject?",
+      'answers': ['science', 'maths', 'computer', 'history']
+    },
+  ];
 
   void _answerHandler() {
     void updateIdx() {
@@ -40,7 +52,8 @@ class _MyWidgetsAppState extends State<MyWidgetsApp> {
       }
     }
 
-    setState(updateIdx); // calls the build method , flutter efficiently renders only the changes
+    setState(
+        updateIdx); // calls the build method , flutter efficiently renders only the changes
   }
 
   /**
@@ -56,19 +69,10 @@ class _MyWidgetsAppState extends State<MyWidgetsApp> {
           ), // header trailing comma for formatting
           body: Column(
             children: [
-              Text(questions[idx]),
-              RaisedButton(
-                child: Text('Black'),
-                onPressed: _answerHandler,
-              ),
-              RaisedButton(
-                child: Text('Grey'),
-                onPressed: _answerHandler,
-              ),
-              RaisedButton(
-                child: Text('Brown'),
-                onPressed: _answerHandler,
-              ),
+              Question(questions[idx]['questionText']),
+              ...(questions[idx]['answers'] as List<String>).map((ans) {
+                return Answer(_answerHandler, ans);
+              }).toList()
             ],
           )
           // body: Text('Body of the app'),
